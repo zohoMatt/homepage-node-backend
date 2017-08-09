@@ -1,0 +1,9 @@
+{
+  "name": "homepage-node-backend",
+  "version": "0.1.0",
+  "description": "RESTful API for mattzo.life",
+  "main": "main.js",
+  "repository": "https://github.com/zohoMatt/homepage-node-backend.git",
+  "author": "mattzo@zoho.com",
+  "license": "WTFPL"
+}
