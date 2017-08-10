@@ -2,8 +2,14 @@
   "name": "homepage-node-backend",
   "version": "0.1.0",
   "description": "RESTful API for mattzo.life",
-  "main": "main.js",
+  "main": "app.js",
   "repository": "https://github.com/zohoMatt/homepage-node-backend.git",
   "author": "mattzo@zoho.com",
-  "license": "WTFPL"
+  "license": "WTFPL",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "express": "^4.15.4",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.11.6"
+  }
 }
