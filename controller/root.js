@@ -1,7 +1,8 @@
 /**
  * Created by hao.zuo on 2017/8/10.
  */
-/******************** Modular requirement *******************/
+
+/******************** Library requirement *******************/
 const express = require('express');
 
 /******************** Sub-controller requirement *******************/
@@ -14,4 +15,5 @@ const root = express();
 // Distribute requests to different sub controllers
 root.use('/api/', diagnosis);
 
+// Export the module
 exports.root = root;
