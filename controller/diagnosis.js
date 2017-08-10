@@ -8,7 +8,6 @@ const diagnosis = express();              // App under /diagnosis/
 /**======================================================**/
 /**                     Diagnosis                        **/
 /**======================================================**/
-// Diagnose the server.
 /**
  * @diagnosis {get} /test Test if the application runs well.
  * @apiName TestServer
@@ -25,4 +24,6 @@ diagnosis.get('/test:id?', (req, res) => {
     res.send(`Hello, your request is received, id is ${req.params.id}, req's path is ${req.path}.`);
 });
 
+
+/******************** Exports *******************/
 exports.api = diagnosis;
