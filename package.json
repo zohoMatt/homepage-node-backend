@@ -6,10 +6,14 @@
   "repository": "https://github.com/zohoMatt/homepage-node-backend.git",
   "author": "mattzo@zoho.com",
   "license": "WTFPL",
+  "scripts": {
+    "start": "node --harmony app.js"
+  },
   "dependencies": {
     "colors": "^1.1.2",
     "express": "^4.15.4",
     "mongodb": "^2.2.31",
     "mongoose": "^4.11.6"
-  }
+  },
+  "devDependencies": {}
 }

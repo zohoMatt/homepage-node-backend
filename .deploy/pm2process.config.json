@@ -1,0 +1,6 @@
+{
+  "name": "hp-node",
+  "script": "app.js",
+  "watch": true,
+  "interpreter_args": "--harmony"
+}

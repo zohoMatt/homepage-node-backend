@@ -22,8 +22,7 @@ const diagnosis = express();              // App under /diagnosis/
  *
  */
 diagnosis.get('/test:id?', (req, res) => {
-    res.sendFile(path.join(__dirname, '/.rsc/test-img.png'));
-    // res.send(`Hello, your request is received, id is ${req.params.id}, req's path is ${req.path}.`);
+    res.send(`Hello, your request is received, id is ${req.params.id}, req's path is ${req.path}.`);
 });
 
 exports.api = diagnosis;
