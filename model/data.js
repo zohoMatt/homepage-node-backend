@@ -32,6 +32,7 @@ const BlogSchema = new Schema({
     }],
     public:                 Boolean         // Whether this article can be read by public
 });
+
 // Projects
 const ProjectSchema = new Schema({
     id:                     Number,         // id of project
@@ -43,12 +44,16 @@ const ProjectSchema = new Schema({
     repo:                   String,         // URL for repository
     playable:               Boolean         // Whether user can play this project online
 });
+
 // Gallery
 const PictureSchema = new Schema({
     id:                     Number,
     pic_title:              String,
     pic_intro:              String,
     pic_size:               Number,         // Size of pic file (by MB)
+    pic_info:[{                             // todo All important pic parameters like shutter, aperture, etc
+
+    }],
     feedback: [{
         likes:              Number,
     }],
@@ -62,13 +67,28 @@ const PictureSchema = new Schema({
 });
 
 const VideoSchema = new Schema({
-
+    // TODO
 });
 
+/**======================================================**/
+/**                       Model                          **/
+/**======================================================**/
+const Blog      = mongoose.model('Blog', BlogSchema);
+const Project   = mongoose.model('Project', ProjectSchema);
+const Picture   = mongoose.model('Picture', PictureSchema);
+const Video     = mongoose.model('Video', VideoSchema);
 
 
+/******************** Exports *******************/
+exports = {
+    ...exports,
+    Blog,
+    Project,
+    Picture,
+    Video
+};
 
-
+/*****************************************/
 // const Project = mongoose.model('Project', {
 //     id: Number,
 //     name: String,

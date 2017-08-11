@@ -22,6 +22,10 @@ const root = require('./controller/root').root;
 /**                 Server Configuration                 **/
 /**======================================================**/
 const PORT = 3000;
+
+// Disable X-POWERED-BY in header
+root.disable('x-powered-by');
+
 // Listen at port localhost:3000
 root.listen(PORT, () => {
     console.log('>> API server is running at port 3000...'.blue);

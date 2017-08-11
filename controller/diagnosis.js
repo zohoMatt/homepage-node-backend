@@ -6,6 +6,11 @@ const express = require('express');
 const diagnosis = express();              // App under /diagnosis/
 
 /**======================================================**/
+/**                  Pre-middleware                      **/
+/**======================================================**/
+
+
+/**======================================================**/
 /**                     Diagnosis                        **/
 /**======================================================**/
 /**
@@ -21,8 +26,14 @@ const diagnosis = express();              // App under /diagnosis/
  *
  */
 diagnosis.get('/test:id?', (req, res) => {
+    console.log('router used');
     res.send(`Hello, your request is received, id is ${req.params.id}, req's path is ${req.path}.`);
 });
+
+
+/**======================================================**/
+/**                  Post-middleware                     **/
+/**======================================================**/
 
 
 /******************** Exports *******************/
