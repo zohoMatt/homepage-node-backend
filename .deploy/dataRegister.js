@@ -4,16 +4,17 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ccolor = require('colors');
 
 // Connect with database
-mongoose.connect('mongodb://localhost/MY_HOME_PAGE');
+const HOMEPAGE_DB = mongoose.connect('mongodb://localhost:20000/HOME_PAGE');
 
 /**======================================================**/
 /**                      Schema                          **/
 /**======================================================**/
 // Blogs
 const BlogSchema = new Schema({
-    id:                     Number,         // id of blog article
+    id:                     String,         // id of blog article
     title:                  String,         // Title of article
     archive:                String,         // Archived folder for this article
     tagList: [{
@@ -35,7 +36,7 @@ const BlogSchema = new Schema({
 
 // Projects
 const ProjectSchema = new Schema({
-    id:                     Number,         // id of project
+    id:                     String,         // id of project
     pname:                  String,         // Name of project
     tagList: [{
         tag:                String          // Tag name
@@ -47,7 +48,7 @@ const ProjectSchema = new Schema({
 
 // Gallery
 const PictureSchema = new Schema({
-    id:                     Number,
+    id:                     String,
     pic_title:              String,
     pic_intro:              String,
     pic_size:               Number,         // Size of pic file (by MB)
@@ -79,36 +80,83 @@ const Picture   = mongoose.model('Picture', PictureSchema);
 const Video     = mongoose.model('Video', VideoSchema);
 
 
+/**======================================================**/
+/**                   Data Register                      **/
+/**======================================================**/
+// Project
+[
+    {
+        id:                     'PF001',
+        pname:                  'mattzo.life',
+        tagList: [
+            {tag: 'web-app'},
+            {tag: 'react'},
+            {tag: 'redux'},
+            {tag: 'webpack'}
+        ],
+        description:            'Just the site you are visiting!',
+        repo:                   'https://github.com/zohoMatt/zohoMatt.github.io',
+        playable:               true
+    },
+    {
+        id:                     'PF010',
+        pname:                  'canvas-tree',
+        tagList: [
+            {tag: 'canvas'}
+        ],
+        description:            'Draw a tree!',
+        repo:                   'https://github.com/zohoMatt/canvas-tree',
+        playable:               true
+    },
+    {
+        id:                     'PF011',
+        pname:                  'frogger-game',
+        tagList: [
+            {tag: 'canvas'}
+        ],
+        description:            'A simple game.',
+        repo:                   'https://github.com/zohoMatt/frogger-game',
+        playable:               true
+    },
+    {
+        id:                     'PA002',
+        pname:                  'everlink-md',
+        tagList: [
+            {tag: 'application'},
+            {tag: 'electron'},
+            {tag: 'react'},
+            {tag: 'reddux'},
+            {tag: 'webpack'}
+        ],
+        description:            'A desktop markdown editor linked with evernote.',
+        repo:                   'https://github.com/zohoMatt/everlink-md',
+        playable:               false
+    },
+    {
+        id:                     'PB012',
+        pname:                  'homepage-node-backend',
+        tagList: [
+            {tag: 'node'},
+            {tag: 'express'},
+            {tag: 'mongodb'}
+        ],
+        description:            'Just the site you are visiting!',
+        repo:                   'homepage-node-backend',
+        playable:               true
+    }
+].forEach((obj) => {
+    // Prevent duplicate documents
+    Project.remove({id: obj.id}, function (err) {
+        if (err) {
+            console.log(`ERROR: ${err.toString()}!`.red);
+        }
+    });
+    const temp = new Project(obj);
+    temp.save();
+});
+
 /******************** Exports *******************/
-exports = {
-    ...exports,
-    Blog,
-    Project,
-    Picture,
-    Video
-};
-
-/*****************************************/
-// const Project = mongoose.model('Project', {
-//     id: Number,
-//     name: String,
-//     playable: Boolean
-// });
-//
-// let everlink_md = new Project({
-//     id: 200,
-//     name: 'everlink-md',
-//     playable: false
-// });
-
-// everlink_md.save((err) => {
-//     if (err) {
-//         console.log(err);
-//     } else {
-//         console.log('Succeed!');
-//     }
-// });
-
-// Project.find({}, function (err, data) {
-//     console.log(data);
-// });
+exports.Blog        = Blog;
+exports.Project     = Project;
+exports.Picture     = Picture;
+exports.Video       = Video;

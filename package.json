@@ -8,7 +8,7 @@
   "license": "WTFPL",
   "scripts": {
     "start": "node --harmony app.js",
-    "test": "mocha"
+    "test": "mocha --harmony"
   },
   "dependencies": {
     "colors": "^1.1.2",
