@@ -2,12 +2,16 @@
  * Created by hao.zuo on 2017/8/10.
  */
 
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const ccolor = require('colors');
+/******************** Library *******************/
+const mongoose  = require('mongoose');
+const fs        = require('fs');
+const path      = require('path');
+const ccolor    = require('colors');
+
+const Schema    = mongoose.Schema;
 
 // Connect with database
-const HOMEPAGE_DB = mongoose.connect('mongodb://localhost:20000/HOME_PAGE');
+const HOMEPAGE_DB = mongoose.connect('mongodb://localhost/HOME_PAGE');
 
 /**======================================================**/
 /**                      Schema                          **/
@@ -154,6 +158,51 @@ const Video     = mongoose.model('Video', VideoSchema);
     const temp = new Project(obj);
     temp.save();
 });
+
+// Blog
+[
+    {
+        id:                     'M0001',
+        title:                  'Welcome to my blog',
+        archive:                'Tests',
+        tagList: [
+            {tag: 'test'}
+        ],
+        context:                fs.readFileSync(path.join(__dirname, `../../static/blog/Welcome to my blog.md`)),
+        feedback: {
+            likes:              0,
+            cmt_no:             0,
+        },
+        comment: [],
+        public:                 true
+    },
+    {
+        id:                     'R0001',
+        title:                  'MacdownHelp',
+        archive:                'Tests',
+        tagList: [
+            {tag: 'test'}
+        ],
+        context:                fs.readFileSync(path.join(__dirname, `../../static/blog/MacdownHelp.md`)),
+        feedback: {
+            likes:              0,
+            cmt_no:             0,
+        },
+        comment: [],
+        public:                 true
+    }
+].forEach((obj) => {
+    // Prevent duplicate documents
+    Blog.remove({id: obj.id}, function (err) {
+        if (err) {
+            console.log(`ERROR: ${err.toString()}!`.red);
+        }
+    });
+    const temp = new Blog(obj);
+    temp.save();
+});
+
+HOMEPAGE_DB.disconnect();
 
 /******************** Exports *******************/
 exports.Blog        = Blog;

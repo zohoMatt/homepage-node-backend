@@ -25,9 +25,14 @@ const diagnosis = express();              // App under /diagnosis/
  * @apiSuccess {String}     state.intro     Introduction on server state.
  *
  */
-diagnosis.get('/test:id?', (req, res) => {
+diagnosis.get('/test/con', (req, res) => {
     const reqInfo = JSON.stringify(req.headers, null, 4);
     res.send(`Hello, your request is as following:\n${reqInfo}`);
+});
+
+
+diagnosis.get('/test/db', (req, res) => {
+
 });
 
 
