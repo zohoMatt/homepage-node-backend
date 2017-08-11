@@ -1,6 +1,13 @@
 /**
  * Created by hao.zuo on 2017/8/10.
  */
+/**================================================================
+ 1. All code is asynchronous and be careful when using queries
+    just after the database is updated.
+
+ 2. This register is for initialize the database only!
+ ================================================================**/
+
 
 /******************** Library *******************/
 const mongoose  = require('mongoose');
@@ -11,62 +18,62 @@ const ccolor    = require('colors');
 const Schema    = mongoose.Schema;
 
 // Connect with database
-const HOMEPAGE_DB = mongoose.connect('mongodb://localhost/HOME_PAGE');
+const HOMEPAGE_DB = mongoose.connect('mongodb://localhost:20000/HOME_PAGE');
 
 /**======================================================**/
 /**                      Schema                          **/
 /**======================================================**/
 // Blogs
 const BlogSchema = new Schema({
-    id:                     String,         // id of blog article
-    title:                  String,         // Title of article
-    archive:                String,         // Archived folder for this article
+    id:                     { type: String, unique: true, index: true },    // id of blog article
+    title:                  String,                                         // Title of article
+    archive:                String,                                         // Archived folder for this article
     tagList: [{
-        tag:                String          // Tag name
+        tag:                String                                          // Tag name
     }],
-    context:                String,         // Content of article
+    context:                String,                                         // Content of article
     feedback: {
-        likes:              Number,         // Likes
-        cmt_no:             Number,         // The number of comments todo Depends on length of comment
+        likes:              Number,                                         // Likes
+        cmt_no:             Number,                                         // The number of comments todo Depends on length of comment
     },
     comment: [{
-        userid:             String,         // id of commenter
-        usermail:           String,         // Email address of commenter
-        time:               String,         // Time of comment todo Present time by default
-        text:               String          // Content of comment
+        userid:             String,                                         // id of commenter
+        usermail:           String,                                         // Email address of commenter
+        time:               String,                                         // Time of comment todo Present time by default
+        text:               String                                          // Content of comment
     }],
-    public:                 Boolean         // Whether this article can be read by public
+    public:                 Boolean                                         // Whether this article can be read by public
 });
 
 // Projects
 const ProjectSchema = new Schema({
-    id:                     String,         // id of project
-    pname:                  String,         // Name of project
+    id:                     { type: String, unique: true, index: true },    // id of project
+    pname:                  String,                                         // Name of project
     tagList: [{
-        tag:                String          // Tag name
+        tag:                String                                          // Tag name
     }],
-    description:            String,         // Brief introduction to project
-    repo:                   String,         // URL for repository
-    playable:               Boolean         // Whether user can play this project online
+    description:            String,                                         // Brief introduction to project
+    repo:                   String,                                         // URL for repository
+    playable:               Boolean                                         // Whether user can play this project online
 });
 
 // Gallery
 const PictureSchema = new Schema({
-    id:                     String,
+    id:                     { type: String, unique: true, index: true },
     pic_title:              String,
     pic_intro:              String,
-    pic_size:               Number,         // Size of pic file (by MB)
-    pic_info:[{                             // todo All important pic parameters like shutter, aperture, etc
+    pic_size:               Number,                                         // Size of pic file (by MB)
+    pic_info:[{                                                             // todo All important pic parameters like shutter, aperture, etc
 
     }],
     feedback: [{
         likes:              Number,
     }],
     comment: [{
-        userid:             String,         // id of commenter
-        usermail:           String,         // Email address of commenter
-        time:               String,         // Time of comment todo Present time by default
-        text:               String          // Content of comment
+        userid:             String,                                         // id of commenter
+        usermail:           String,                                         // Email address of commenter
+        time:               String,                                         // Time of comment todo Present time by default
+        text:               String                                          // Content of comment
     }],
     public:                 Boolean
 });
@@ -87,6 +94,7 @@ const Video     = mongoose.model('Video', VideoSchema);
 /**======================================================**/
 /**                   Data Register                      **/
 /**======================================================**/
+// fixme .findOneAndUpdate method with upsert option does not working while entry does not exists
 // Project
 [
     {
@@ -149,14 +157,7 @@ const Video     = mongoose.model('Video', VideoSchema);
         playable:               true
     }
 ].forEach((obj) => {
-    // Prevent duplicate documents
-    Project.remove({id: obj.id}, function (err) {
-        if (err) {
-            console.log(`ERROR: ${err.toString()}!`.red);
-        }
-    });
-    const temp = new Project(obj);
-    temp.save();
+    Project.findOneAndUpdate(obj, obj, {upsert: true});
 });
 
 // Blog
@@ -192,14 +193,7 @@ const Video     = mongoose.model('Video', VideoSchema);
         public:                 true
     }
 ].forEach((obj) => {
-    // Prevent duplicate documents
-    Blog.remove({id: obj.id}, function (err) {
-        if (err) {
-            console.log(`ERROR: ${err.toString()}!`.red);
-        }
-    });
-    const temp = new Blog(obj);
-    temp.save();
+    Blog.findOneAndUpdate(obj, obj, {upsert: true});
 });
 
 HOMEPAGE_DB.disconnect();
@@ -209,3 +203,4 @@ exports.Blog        = Blog;
 exports.Project     = Project;
 exports.Picture     = Picture;
 exports.Video       = Video;
+exports.DB          = HOMEPAGE_DB;
