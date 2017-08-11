@@ -6,9 +6,13 @@ const express = require('express');
 const diagnosis = express();              // App under /diagnosis/
 
 /**======================================================**/
+/**                  Pre-middleware                      **/
+/**======================================================**/
+
+
+/**======================================================**/
 /**                     Diagnosis                        **/
 /**======================================================**/
-// Diagnose the server.
 /**
  * @diagnosis {get} /test Test if the application runs well.
  * @apiName TestServer
@@ -21,9 +25,21 @@ const diagnosis = express();              // App under /diagnosis/
  * @apiSuccess {String}     state.intro     Introduction on server state.
  *
  */
-diagnosis.get('/test:id?', (req, res) => {
-    res.sendFile(path.join(__dirname, '/.rsc/test-img.png'));
-    // res.send(`Hello, your request is received, id is ${req.params.id}, req's path is ${req.path}.`);
+diagnosis.get('/test/con', (req, res) => {
+    const reqInfo = JSON.stringify(req.headers, null, 4);
+    res.send(`Hello, your request is as following:\n${reqInfo}`);
 });
 
+
+diagnosis.get('/test/db', (req, res) => {
+
+});
+
+
+/**======================================================**/
+/**                  Post-middleware                     **/
+/**======================================================**/
+
+
+/******************** Exports *******************/
 exports.api = diagnosis;
