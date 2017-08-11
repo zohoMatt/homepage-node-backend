@@ -7,11 +7,13 @@
   "author": "mattzo@zoho.com",
   "license": "WTFPL",
   "scripts": {
-    "start": "node --harmony app.js"
+    "start": "node --harmony app.js",
+    "test": "mocha"
   },
   "dependencies": {
     "colors": "^1.1.2",
     "express": "^4.15.4",
+    "mocha": "^3.5.0",
     "mongodb": "^2.2.31",
     "mongoose": "^4.11.6"
   },
