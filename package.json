@@ -7,7 +7,7 @@
   "author": "mattzo@zoho.com",
   "license": "WTFPL",
   "scripts": {
-    "start": "node --harmony app.js",
+    "start": "nodemon --watch . --harmony app.js",
     "test": "mocha --harmony"
   },
   "dependencies": {
