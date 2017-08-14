@@ -75,7 +75,6 @@ projectApi.get('/all', (req, res) => {
                 id: Date.now(),
                 list: data
             })
-
         })
         .catch((err) => {
             console.log(`!! ERROR WHILE GETTING ALL PROJECTS !! ${err}`.red);

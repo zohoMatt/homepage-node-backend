@@ -35,14 +35,25 @@ const getAllProjectsAsync = () => {
     });
 };
 
-
+/**
+ * Get projects with params as query. Parameters are explained in the API file.
+ *
+ * @param id        {String}
+ * @param pname     {String}
+ * @param tag       {String}
+ * @param kword     {String}
+ * @param play      {Boolean}
+ *
+ * @returns {Promise}
+ */
 const getProjectAsync = ({id, pname, tag, kword, play}) => {
     // Modify the query
     const query = {
-        id: id ? new RegExp(id) : undefined,
-        pname: pname || undefined,
-        description: kword ? new RegExp(kword) : undefined,
-        playable: play || undefined
+        id:             id      ? new RegExp(id, 'i')       : undefined,
+        pname:          pname   ? new RegExp(pname, 'i')    : undefined,
+        description:    kword   ? new RegExp(kword, 'i')    : undefined,
+        'tagList.tag':  tag     ? new RegExp(tag, 'i')      : undefined,
+        playable:       play || undefined
     };
     for (const key of Object.keys(query)) {
         if (query[key] === undefined) {

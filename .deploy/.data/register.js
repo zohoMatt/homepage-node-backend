@@ -57,7 +57,7 @@ const Project = require('../../model/Schema').Project;
             {tag: 'application'},
             {tag: 'electron'},
             {tag: 'react'},
-            {tag: 'reddux'},
+            {tag: 'redux'},
             {tag: 'webpack'}
         ],
         description:            'A desktop markdown editor linked with evernote.',
