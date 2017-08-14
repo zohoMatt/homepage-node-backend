@@ -35,6 +35,7 @@ diagnosis.get('/con', (req, res) => {
 
 diagnosis.get('/db', (req, res) => {
     // todo Check if database works well
+    res.send(`Well.. OK!`);
 });
 
 
