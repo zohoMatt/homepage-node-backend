@@ -13,11 +13,13 @@ const diagnosis = express();              // App under /diagnosis/
 /**======================================================**/
 /**                     Diagnosis                        **/
 /**======================================================**/
+
+/******************** GET *******************/
+
 /**
- * @diagnosis {get} /test Test if the application runs well.
+ * @api {get} /test Test if the application runs well.
  * @apiName TestServer
  * @apiGroup Test
- * @apiVersion 0.1.0
  *
  * @apiSuccess {String}     id              Response ID.
  * @apiSuccess {String}     state           Server state.
@@ -25,14 +27,14 @@ const diagnosis = express();              // App under /diagnosis/
  * @apiSuccess {String}     state.intro     Introduction on server state.
  *
  */
-diagnosis.get('/test/con', (req, res) => {
+diagnosis.get('/con', (req, res) => {
     const reqInfo = JSON.stringify(req.headers, null, 4);
     res.send(`Hello, your request is as following:\n${reqInfo}`);
 });
 
 
-diagnosis.get('/test/db', (req, res) => {
-
+diagnosis.get('/db', (req, res) => {
+    // todo Check if database works well
 });
 
 

@@ -18,5 +18,7 @@
     "mongodb": "^2.2.31",
     "mongoose": "^4.11.6"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "apidoc": {
+  }
 }

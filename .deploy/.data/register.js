@@ -18,7 +18,7 @@ const ccolor    = require('colors');
 const Schema    = mongoose.Schema;
 
 // Connect with database
-const HOMEPAGE_DB = mongoose.connect('mongodb://localhost:20000/HOME_PAGE');
+const HOMEPAGE_DB = mongoose.connect('mongodb://localhost/HOME_PAGE');
 
 /**======================================================**/
 /**                      Schema                          **/

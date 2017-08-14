@@ -8,3 +8,8 @@
 node_modules
 
 # Blocked temporarily
+
+# Distribution or docs
+doc
+docs
+out
