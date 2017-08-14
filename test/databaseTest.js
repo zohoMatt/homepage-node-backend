@@ -4,11 +4,16 @@
 /******************** Library *******************/
 const mocha     = require('mocha');
 const assert    = require('assert');
-const cclor     = require('colors');
+
+/******************** Functions to test *******************/
+const getProjectsAsync    = require('../model/projectDataHandler').getProjectsAsync;
 
 /******************** File *******************/
 describe('MongoDB database tests', () => {
-    it('should save record to database', () => {
-
+    // This is not a quite reliable test.
+    it('should get at least 3 project info', () => {
+        getProjectsAsync().then((res) => {
+            assert(res.length >= 3);
+        });
     });
 });
