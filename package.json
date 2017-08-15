@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "colors": "^1.1.2",
+    "cors": "^2.8.4",
     "express": "^4.15.4",
     "marked": "^0.3.6",
     "mocha": "^3.5.0",
@@ -19,6 +20,5 @@
     "mongoose": "^4.11.6"
   },
   "devDependencies": {},
-  "apidoc": {
-  }
+  "apidoc": {}
 }

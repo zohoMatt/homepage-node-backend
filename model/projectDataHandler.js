@@ -6,6 +6,24 @@ const ccolor = require('colors');
 
 const Project = require('./Schema').Project;
 
+/**======================================================**/
+/**                     Helpers                         **/
+/**======================================================**/
+const removeAttrs = (project) => {
+    delete project._id;
+    delete project.__v;
+    project.tagList.map((tag) => {
+        delete tag._id;
+    });
+    return project;
+};
+
+
+
+/**======================================================**/
+/**                     Interface                        **/
+/**======================================================**/
+
 /**
  * Get all projects and their details. Modify data and delete unnecessary attributes.
  *
@@ -21,13 +39,7 @@ const getAllProjectsAsync = () => {
             }
             // Modifying result, removing unnecessary attributes
             data.map((obj) => {
-                delete obj._id;
-                delete obj.__v;
-                obj.tagList.map((tag) => {
-                    delete tag._id;
-                    return tag;
-                });
-                return obj;
+                removeAttrs(obj);
             });
             // Passing params while succeeding
             resolve(data);
@@ -68,6 +80,12 @@ const getProjectAsync = ({id, pname, tag, kword, play}) => {
             if (err) {
                 reject(err);
                 return;
+            }
+            if (data) {
+                // Modifying data
+                data.map((d) => {
+                    removeAttrs(d);
+                });
             }
             // Passing data through
             resolve(data);

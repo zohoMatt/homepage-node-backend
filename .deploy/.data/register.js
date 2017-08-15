@@ -8,6 +8,10 @@
  2. This register is for initialize the database only!
  ================================================================**/
 
+const fs        = require('fs');
+const path      = require('path');
+const cclor     = require('colors');
+
 const Blog = require('../../model/Schema').Blog;
 const Project = require('../../model/Schema').Project;
 
@@ -15,6 +19,7 @@ const Project = require('../../model/Schema').Project;
 /**                   Data Register                      **/
 /**======================================================**/
 // fixme .findOneAndUpdate method with upsert option does not working while entry does not exists
+// attention You must assign a callback function coz FOUR params are permitted while THREE params are not
 // Project
 [
     {
@@ -44,7 +49,8 @@ const Project = require('../../model/Schema').Project;
         id:                     'PF011',
         pname:                  'frogger-game',
         tagList: [
-            {tag: 'canvas'}
+            {tag: 'canvas'},
+            {tag: 'game'}
         ],
         description:            'A simple game.',
         repo:                   'https://github.com/zohoMatt/frogger-game',
@@ -77,7 +83,9 @@ const Project = require('../../model/Schema').Project;
         playable:               true
     }
 ].forEach((obj) => {
-    Project.findOneAndUpdate(obj, obj, {upsert: true});
+    Project.findOneAndUpdate({id: obj.id}, obj, {upsert: true, 'new': true}, function (err, doc) {
+        console.log(`${'>>'.blue}Succeeding in adding/updating document ${JSON.stringify(obj)}`);
+    });
 });
 
 // Blog
@@ -113,6 +121,9 @@ const Project = require('../../model/Schema').Project;
         public:                 true
     }
 ].forEach((obj) => {
-    Blog.findOneAndUpdate(obj, obj, {upsert: true});
+    Blog.findOneAndUpdate({id: obj.id}, obj, {upsert: true, 'new': true}, function (err, doc) {
+        console.log(`${'>>'.blue}Succeeding in adding/updating document ${JSON.stringify(obj)}`);
+
+    });
 });
 
