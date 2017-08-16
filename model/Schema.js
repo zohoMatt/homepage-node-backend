@@ -46,7 +46,7 @@ const ProjectSchema = new Schema({
     }],
     description:            String,                                         // Brief introduction to project
     repo:                   String,                                         // URL for repository
-    playable:               Boolean                                         // Whether user can play this project online
+    playUrl:                String                                         // Whether user can play this project online
 });
 
 // Gallery
