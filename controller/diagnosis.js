@@ -17,7 +17,7 @@ const diagnosis = express();              // App under /diagnosis/
 /******************** GET *******************/
 
 /**
- * @api {get} /test Test if the application runs well.
+ * @api {get} /con Test if the application runs well.
  * @apiName TestServer
  * @apiGroup Test
  *

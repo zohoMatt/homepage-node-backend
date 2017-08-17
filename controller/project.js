@@ -1,6 +1,7 @@
 /**
  * Created by hao.zuo on 2017/8/14.
  */
+const path = require('path');
 const express = require('express');
 const projectApi = express();
 

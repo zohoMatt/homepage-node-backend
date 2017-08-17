@@ -33,7 +33,7 @@ const Project = require('../../model/Schema').Project;
         ],
         description:            'Just the site you are visiting!',
         repo:                   'https://github.com/zohoMatt/zohoMatt.github.io',
-        playable:               true
+        playUrl:                'http://mattzo.life'
     },
     {
         id:                     'PF010',
@@ -43,7 +43,7 @@ const Project = require('../../model/Schema').Project;
         ],
         description:            'Draw a tree!',
         repo:                   'https://github.com/zohoMatt/canvas-tree',
-        playable:               true
+        playUrl:                'https://zohomatt.github.io/canvas-tree/'
     },
     {
         id:                     'PF011',
@@ -54,7 +54,7 @@ const Project = require('../../model/Schema').Project;
         ],
         description:            'A simple game.',
         repo:                   'https://github.com/zohoMatt/frogger-game',
-        playable:               true
+        playUrl:                'https://zohomatt.github.io/frogger-game'
     },
     {
         id:                     'PA002',
@@ -68,7 +68,7 @@ const Project = require('../../model/Schema').Project;
         ],
         description:            'A desktop markdown editor linked with evernote.',
         repo:                   'https://github.com/zohoMatt/everlink-md',
-        playable:               false
+        playUrl:                ''
     },
     {
         id:                     'PB012',
@@ -80,7 +80,7 @@ const Project = require('../../model/Schema').Project;
         ],
         description:            'Just the site you are visiting!',
         repo:                   'homepage-node-backend',
-        playable:               true
+        playUrl:                ''
     }
 ].forEach((obj) => {
     Project.findOneAndUpdate({id: obj.id}, obj, {upsert: true, 'new': true}, function (err, doc) {
