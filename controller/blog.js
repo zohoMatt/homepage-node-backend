@@ -34,6 +34,7 @@ const getAllBlogsAsync = require('../model/blogDataHandler').getAllBlogsAsync;
 blogApi.get('/all', (req, res) => {
   getAllBlogsAsync()
   .then((data) => {
+    console.log(data.green);
     res.send({
       id: Date.now(),
       list: data
