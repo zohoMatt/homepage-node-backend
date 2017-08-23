@@ -2,23 +2,11 @@
  * Created by hao.zuo on 2017/8/14.
  */
 
+// fixme Handling errors
 const ccolor = require('colors');
 
 const Project = require('./Schema').Project;
-
-/**======================================================**/
-/**                     Helpers                         **/
-/**======================================================**/
-const removeAttrs = (project) => {
-    delete project._id;
-    delete project.__v;
-    project.tagList.map((tag) => {
-        delete tag._id;
-    });
-    return project;
-};
-
-
+const removeAttrs = require('./helpers').removeAttrs;
 
 /**======================================================**/
 /**                     Interface                        **/
@@ -85,6 +73,7 @@ const getProjectAsync = ({id, pname, tag, kword, play}) => {
                 // Modifying data
                 data.map((d) => {
                     removeAttrs(d);
+                    // fixme Modify the context
                 });
             }
             // Passing data through

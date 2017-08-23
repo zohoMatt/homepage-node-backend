@@ -34,8 +34,7 @@ const getProjectAsync           = require('../model/projectDataHandler').getProj
  * @apiSuccess {Object[]}   list                        Container of results, even response with only one project.
  * @apiSuccess {String}     list.id                     ID of project, unique.
  * @apiSuccess {String}     list.pname                  Name of project.
- * @apiSuccess {Object[]}   list.tagList                Tags for the project; array.
- * @apiSuccess {String}     list.tagList.tag            Tag name.
+ * @apiSuccess {String[]}   list.tagList                Tags for the project; array.
  * @apiSuccess {String}     list.description            Brief description for this project
  * @apiSuccess {String}     list.repo                   URL of repository of this project.
  * @apiSuccess {Boolean}    list.playable               Whether can be visited as web application.
